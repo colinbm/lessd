@@ -32,7 +32,8 @@ notifier = INotify::Notifier.new
 $config['paths'].each do |path|
   notifier.watch(path, :create, :modify, :recursive) do |event|
     if /\.less$/.match(event.name)
-      less = event.notifier.watchers[event.watcher_id].path + '/' + event.name
+      Dir.chdir(event.notifier.watchers[event.watcher_id].path)
+      less = File.join(event.notifier.watchers[event.watcher_id].path, event.name)
       if !excluded? less
         css = less.gsub(/\.less$/, '.css')
         puts "lessc #{less} > #{css}"
