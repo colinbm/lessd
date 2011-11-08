@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'rb-inotify'
+require 'yaml'
+
+config_file = ENV['HOME'] + "/.lessd.yml"
+
+if !File.exist?(config_file)
+  puts "No config file found at #{config_file}"
+  Process.exit
+end
+
+$config = YAML::load(File.open(config_file))
+
+# Convert the excludes to regexes once
+$config['exclude'].map! do |exclusion|
+  exclusion = Regexp.new(exclusion)
+end
+
+# Test if the path matches any excluded regexes
+def excluded?(less)
+  $config['exclude'].each do |exclusion| 
+    if exclusion.match(less)
+      return true
+    end
+  end
+  return false
+end
+
+notifier = INotify::Notifier.new
+
+$config['paths'].each do |path|
+  notifier.watch(path, :create, :modify, :recursive) do |event|
+    if /\.less$/.match(event.name)
+      less = event.notifier.watchers[event.watcher_id].path + '/' + event.name
+      if !excluded? less
+        css = less.gsub(/\.less$/, '.css')
+        puts "lessc #{less} > #{css}"
+        system "lessc #{less} > #{css}"
+      end
+    end
+  end
+end
+
+notifier.run

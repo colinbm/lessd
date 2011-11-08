@@ -1,0 +1,8 @@
+exclude:
+  - \.inc\.less$  # include only files
+  - safe_save_\d+ # transmit safe save
+
+paths:
+  - /var/www/css
+  - /another/website/css
+  
