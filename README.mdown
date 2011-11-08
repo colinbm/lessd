@@ -8,6 +8,7 @@ lessd runs in the background, monitoring the directories you specify in your ~/.
 Requirements
 ------------
 
+- [Less](http://lesscss.org/) - And in particular the `lessc` command.
 - [INotify](http://en.wikipedia.org/wiki/Inotify) - Linux kernel extension - was running on my system already.
 - [rb-inotify](https://rubygems.org/gems/rb-inotify) - `gem install rb-inotify`
 - [daemons](http://raa.ruby-lang.org/project/daemons/) - `gem install daemons`
@@ -15,10 +16,10 @@ Requirements
 Usage
 -----
 
-- Create your configuration file at ~/.lessd.yml, based on the included example.
+- Create your configuration file at `~/.lessd.yml`, based on the included example.
 - Run `lessd_control start`
 
 Improvement
 -----------
 
-This is the first proper thing I've written in Ruby, so it's probably all wrong. Please tell me why. One obvious improvement would be to not require the separate lessd_control file. I couldn't see how to do this and retain the start/stop/etc control. 
+This is the first proper thing I've written in Ruby, so it's probably all wrong. Please tell me why. One obvious improvement would be to not require the separate lessd_control file. I couldn't see how to do this and retain the start/stop/etc control.
