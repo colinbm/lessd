@@ -3,7 +3,7 @@
 
 I saw [CodeKit](http://incident57.com/codekit/) and thought it was really cool, but I can't bring myself to rely on a GUI app for something I think should be server side. Of course this doesn't do nearly as much as CodeKit, but it does do the same as its predecessor [{less}.app](http://incident57.com/less/)
 
-lessd runs in the background, monitoring the directories you specify in your ~/.lessd.yml file, and compiles the css on the fly.
+lessd runs in the background, monitoring the directories you specify in your ~/.lessd/lessd.yml file, and compiles the css on the fly.
 
 Requirements
 ------------
