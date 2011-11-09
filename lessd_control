@@ -4,7 +4,7 @@ require 'daemons'
 
 Daemons.run(File.join(File.dirname(__FILE__), 'lessd'), { 
   :dir_mode   => :normal, 
-  :dir        => ENV['HOME'],
+  :dir        => File.join(ENV['HOME'], '.lessd'),
   :monitor    => true,
   :log_output => true
 })

@@ -16,7 +16,7 @@ Requirements
 Usage
 -----
 
-- Create your configuration file at `~/.lessd.yml`, based on the included example.
+- Create your configuration file at `~/.lessd/lessd.yml`, based on the included example.
 - Run `lessd_control start`
 
 Improvement

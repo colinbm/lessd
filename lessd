@@ -3,11 +3,17 @@
 require 'rb-inotify'
 require 'yaml'
 
-config_file = ENV['HOME'] + "/.lessd.yml"
+config_file = File.join(ENV['HOME'], '.lessd', 'lessd.yml')
 
 if !File.exist?(config_file)
-  puts "No config file found at #{config_file}"
-  Process.exit
+  Dir.mkdir(File.join(ENV['HOME'], '.lessd'))
+  File.open(config_file, 'a') do |f| 
+    f.puts 'exclude:' 
+    f.puts '  - \.inc\.less$'
+    f.puts '  - safe_save_\d+'
+    f.puts 'paths:'
+    f.puts '  - /var/www/css'
+  end
 end
 
 $config = YAML::load(File.open(config_file))
