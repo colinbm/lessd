@@ -8,6 +8,7 @@ lessd runs in the background, monitoring the directories you specify in your ~/.
 Requirements
 ------------
 
+- [Ruby](http://www.ruby-lang.org/)
 - [Less](http://lesscss.org/) - And in particular the `lessc` command.
 - [INotify](http://en.wikipedia.org/wiki/Inotify) - Linux kernel extension - was running on my system already.
 - [rb-inotify](https://rubygems.org/gems/rb-inotify) - `gem install rb-inotify`
