@@ -6,3 +6,6 @@ paths:
   - /var/www/css
   - /another/website/css
   
+transformation:
+  find: \/less\/
+  replace: /css/

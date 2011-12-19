@@ -13,6 +13,9 @@ if !File.exist?(config_file)
     f.puts '  - safe_save_\d+'
     f.puts 'paths:'
     f.puts '  - /var/www/css'
+    f.puts 'transformation:'
+    f.puts '  find: \/less\/'
+    f.puts '  replace: /css/'
   end
 end
 
@@ -22,6 +25,8 @@ $config = YAML::load(File.open(config_file))
 $config['exclude'].map! do |exclusion|
   exclusion = Regexp.new(exclusion)
 end
+
+$config['transformation']['find'] = Regexp.new($config['transformation']['find'])
 
 # Test if the path matches any excluded regexes
 def excluded?(less)
@@ -43,6 +48,9 @@ $config['paths'].each do |path|
         less = File.join(event.notifier.watchers[event.watcher_id].path, event.name)
         if !excluded? less
           css = less.gsub(/\.less$/, '.css')
+          if $config['transformation']
+            css = css.gsub(Regexp.new($config['transformation']['find']), $config['transformation']['replace'])
+          end
           puts "lessc #{less} > #{css}"
           system "lessc #{less} > #{css}"
         end
